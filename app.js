@@ -1,3 +1,6 @@
+// Cada linea de código tiene un comentario explicativo 
+// para que puedas comprender que se hizo en cada paso
+
 const apiKey = "f5w0AqiyhPbskiSXtzTQVtyR8d1NGMzkcYW4K5ujeKKrps2mOTJGJwqZ"; 
 const numPage = 20; // Número de imágenes a cargar por página
 let currentPage = 1; // Página actual, empieza desde la 1
@@ -71,17 +74,7 @@ buscarInput.addEventListener('keyup', (e) => {
   // e = representa el objeto del evento que el navegador 
   // envía automáticamente a la función del manejador.
 
-//   key = es una propiedad específica del objeto del 
-//   evento en los eventos de teclado como
 
-// Cada vez que ocurre un evento relacionado con el teclado, 
-// el navegador crea un objeto del evento.
-//   Este objeto contiene información sobre el evento,
-//   incluyendo la tecla que fue presionada.
-
-// {
-//     key: "Enter",
-// }
   if (e.key === 'Enter') {
     // Verifica si la tecla presionada es "Enter"
     console.log('Enter key pressed'); // Muestra un mensaje en la consola

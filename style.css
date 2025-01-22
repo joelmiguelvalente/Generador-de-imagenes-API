@@ -1,3 +1,6 @@
+/* Cada linea de código tiene un comentario explicativo 
+para que puedas comprender que se hizo en cada paso */
+
 /* Reinicia márgenes y rellenos en todos los elementos */
 * {
     margin: 0; /* Elimina el margen por defecto */
