@@ -36,4 +36,4 @@ No necesitas instalar ninguna dependencia o librería. Solo abre el archivo `ind
 ## 🚀 **Cómo usarlo**  
 1. Clona este repositorio:  
    ```bash  
-   git clone https://github.com/tuusuario/tu-repo.git  
+   git clone https://github.com/Ceciliapradob/Generador-de-imagenes-API
