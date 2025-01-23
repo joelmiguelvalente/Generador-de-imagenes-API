@@ -1,34 +1,49 @@
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="stylesheet" href="style.css" />
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-      <title>Document</title>
-    </head>
-    <body>
-      <section class="search">
-        <img src="/images/paisaje10.jpg" alt="" class="image" />
-        <div class="container">
-          <h1>Generador de imágenes</h1>
-          <p>+5000 imágenes a tu gusto</p>
-          <div class="search-container">
-            <!-- aca va un icono  -->
-            <input class="input" type="text" placeholder="Search image" />
-          </div>
-        </div>
-      </section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="./style.css" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<title>Api - Pexels</title>
+</head>
+<body>
+	<section class="search">
+	  	<img src="./images/paisaje7.jpg" alt="header background" class="image" />
+	  	<div class="container">
+		 	<h1>Generador de imágenes</h1>
+		 	<p>+5000 imágenes a tu gusto</p>
+		 	<div class="search-container">
+				<!-- aca va un icono  -->
+				<i class="fas fa-search" aria-hidden="true"></i>
+				<input class="input" type="text" placeholder="Search image" />
+		 	</div>
+	 	</div>
+	</section>
 
-      <!-- seccion para las imagenes  -->
+	<!-- seccion para las imagenes  -->
 
-      <section class="images-container">
-        <ul class="images">
-          
-        </ul>
-        <button class="load-more">Ver más</button>
-      </section>
+	<section class="images-container">
+		<ul class="images"></ul>
+		<button class="load-more">Ver más</button>
+	</section>
 
-      <script src="app.js"></script>
-    </body>
-  </html>
+	<!-- De esta forma evitamos usar el js y solo clonamos -->
+	<template id="image-items">
+		<li class="list">
+			<img src="" alt="Image by " loading="lazy">
+      	<!-- 'image.src.large2x': URL de la imagen en alta calidad -->
+      	<div class="container-details">
+        		<div class="details">
+          		<i class="fas fa-camera" aria-hidden="true"></i> 
+          		<span></span>
+          		<!-- 'image.photographer': Nombre del fotógrafo -->
+        		</div>
+        		<button><i class="fa-solid fa-download"></i></button>
+      	</div>
+    	</li>
+	</template>
+
+	<script src="./app.js"></script>
+</body>
+</html>

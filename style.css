@@ -1,218 +1,201 @@
-/* Cada linea de código tiene un comentario explicativo 
-para que puedas comprender que se hizo en cada paso */
+/* Cada linea de código tiene un comentario explicativo para que puedas comprender que se hizo en cada paso */
+:root {
+	--font-base: system-ui, -apple-system, "Segoe UI", Inter, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+	/* Color del botón */
+	--bg-button: 12, 145, 12;
+
+	--black: 0, 0, 0;
+	--white: 255, 255, 255;
+
+	/** Borde redondeado **/
+	--rounded: .325rem;
+}
 
 /* Reinicia márgenes y rellenos en todos los elementos */
 * {
-    margin: 0; /* Elimina el margen por defecto */
-    padding: 0; /* Elimina el relleno por defecto */
+	margin: 0; /* Elimina el margen por defecto */
+	padding: 0; /* Elimina el relleno por defecto */
 }
 /* PASO 1  */
+body {
+	font: normal normal 400 1rem/1.5rem var(--font-base);
+}
 
+/**
+ * Desde este punto la sintaxis cambia un poco, ya que se usa
+ * de forma anidada, esto evitará problemas con otros fragmentos
+ * código en el futuro
+*/
 
 /* Estilos para la sección de búsqueda */
 .search {
-    height: 40vh; /* Asigna la altura del 40% de la ventana del navegador */
-    position: relative; /* Permite que los elementos dentro de este contenedor se posicionen con respecto a él */
-    display: flex; /* Usamos Flexbox para alinear los elementos dentro del contenedor */
-    align-items: center; /* Alinea los elementos verticalmente en el centro */
-    justify-content: center; /* Alinea los elementos horizontalmente en el centro */
+	/** dvh = la altura será dinámica con respecto al dispositivo **/
+	height: 50dvh; /* Asigna la altura del 40% de la ventana del navegador */
+	position: relative; /* Permite que los elementos dentro de este contenedor se posicionen con respecto a él */
+	display: flex; /* Usamos Flexbox para alinear los elementos dentro del contenedor */
+	align-items: center; /* Alinea los elementos verticalmente en el centro */
+	justify-content: center; /* Alinea los elementos horizontalmente en el centro */
+	/** Agrego una máscara para que la fuente se note **/
+	&::before {
+		content: '';
+		inset: 0; /* top, bottom, left y right (mismo valor) */
+		background: rgba(var(--black),.5); /** Lo mismo que #0005 **/
+		position: absolute;
+		z-index: 1;
+		backdrop-filter: blur(2px);
+	}
+	img {
+		width: 100%; /* La imagen ocupa el 100% del ancho del contenedor */
+		height: 100%; /* La imagen ocupa el 100% de la altura del contenedor */
+		object-fit: cover; /* Asegura que la imagen cubra el contenedor sin deformarse */
+		position: absolute; /* Permite que la imagen se posicione detrás de otros elementos */
+	}
+	/* Contenedor de texto dentro de la sección de búsqueda */
+	.container {
+		position: relative; /* Permite que los elementos dentro de este contenedor se posicionen con respecto a él */
+		z-index: 2; /* Asegura que el texto se muestre por encima de la imagen */
+	}
+	/* Estilos para el título (h1) dentro de la sección de búsqueda */
+	h1 {
+		/** https://developer.mozilla.org/en-US/docs/Web/CSS/clamp */
+		font-size: clamp(2rem, 10vw, 3rem);  /* Asigna un tamaño de fuente de 3rem (fuente más grande) */
+		font-weight: bold; /* Hace que el texto sea negrita */
+		margin-bottom: 2rem; /** 1rem = 16px | 2rem = 32px **/
+	}
+	/* Estilos para el párrafo (p) dentro de la sección de búsqueda */
+	p {
+		font-size: clamp(1rem, 10vw, 2rem); /* Asigna un tamaño de fuente de 2rem */
+		margin-top: 8px; /* Agrega un margen superior de 8px para separar el texto del título */
+	}
+	:where(h1, p) {
+		color: rgb(var(--white)); /* El texto dentro del contenedor será blanco */
+		display: block;
+		text-align: center;
+	}
+
+	/* Contenedor de la caja de búsqueda */
+	.search-container {
+		margin: 30px 0; /* Agrega un margen superior e inferior de 30px */
+		/* Estilos para el campo de entrada (input) dentro del contenedor de búsqueda */
+		i {
+			position: absolute;
+			font-size: 2rem; /** 1.5rem = 24px **/
+			padding: .625rem; /** .625rem = 10px **/
+		}
+		input {
+			width: 100%; /* El input ocupa todo el ancho del contenedor */
+			height: 100%; /* El input ocupa toda la altura disponible del contenedor */
+			outline: none; /* Elimina el borde por defecto cuando el input está enfocado */
+			border: none; /* Elimina el borde del input */
+			padding: 1rem; /* Agrega 16px de relleno dentro del input */
+			padding-left: 3.75rem; /* Agrega 60px de relleno solo en el lado izquierdo */
+			border-radius: var(--rounded); /* Redondea las esquinas del input */
+			font-size: 1.1rem; /* Asigna un tamaño de fuente ligeramente mayor al estándar */
+			box-sizing: border-box; /** Evitamos que se salga del contenedor padre **/
+		}
+	}
 }
-
-.search img {
-    width: 100%; /* La imagen ocupa el 100% del ancho del contenedor */
-    height: 100%; /* La imagen ocupa el 100% de la altura del contenedor */
-    object-fit: cover; /* Asegura que la imagen cubra el contenedor sin deformarse */
-    position: absolute; /* Permite que la imagen se posicione detrás de otros elementos */
-}
-
-/* Contenedor de texto dentro de la sección de búsqueda */
-.search .container {
-    position: relative; /* Permite que los elementos dentro de este contenedor se posicionen con respecto a él */
-    color: white; /* El texto dentro del contenedor será blanco */
-    z-index: 2; /* Asegura que el texto se muestre por encima de la imagen */
-}
-
-/* Estilos para el título (h1) dentro de la sección de búsqueda */
-.search h1 {
-    font-size: 3rem; /* Asigna un tamaño de fuente de 3rem (fuente más grande) */
-    font-weight: bold; /* Hace que el texto sea negrita */
-}
-
-/* Estilos para el párrafo (p) dentro de la sección de búsqueda */
-.search p {
-    font-size: 2rem; /* Asigna un tamaño de fuente de 2rem */
-    margin-top: 8px; /* Agrega un margen superior de 8px para separar el texto del título */
-}
-
-
-/* Contenedor de la caja de búsqueda */
-.search-container {
-    margin: 30px 0; /* Agrega un margen superior e inferior de 30px */
-}
-
-/* Estilos para el campo de entrada (input) dentro del 
-contenedor de búsqueda */
-.search-container input {
-    width: 100%; /* El input ocupa todo el ancho del contenedor */
-    height: 100%; /* El input ocupa toda la altura disponible 
-    del contenedor */
-    outline: none; /* Elimina el borde por defecto cuando el 
-    input está enfocado */
-    border: none; /* Elimina el borde del input */
-    padding: 15px; /* Agrega 15px de relleno dentro del input */
-    padding-left: 55px; /* Agrega 55px de relleno solo en el 
-    lado izquierdo */
-    border-radius: 5px; /* Redondea las esquinas del input */
-    font-size: 1.1rem; /* Asigna un tamaño de fuente ligeramente 
-    mayor al estándar */
-}
-
 
 /* PASO 2  */
 
 /* Estilos para el contenedor de imágenes */
 .images-container {
-    display: flex; /* Usamos Flexbox para 
-    alinear las imágenes */
-    flex-direction: column; /* Coloca las 
-    imágenes en una columna */
-    align-items: center; /* Centra las 
-    imágenes horizontalmente */
+	display: flex; /* Usamos Flexbox para alinear las imágenes */
+	flex-direction: column; /* Coloca las imágenes en una columna */
+	align-items: center; /* Centra las imágenes horizontalmente */
+	/* Estilos para las listas de imágenes */
+	.images {
+		gap: 15px; /* Establece un espacio de 15px entre cada imagen */
+		columns: 5 340px; /* Organiza las imágenes en 5 columnas, con un ancho máximo de 340px por imagen */
+		max-width: 95%; /* Limita el ancho máximo del contenedor al 95% */
+		margin-top: 40px; /* Agrega un margen superior de 40px */
+		cursor: pointer; /* Cambia el cursor a un puntero para indicar que es interactivo */
+		display: block;
+		/* Estilos para cada item de la lista de imágenes */
+		.list {
+			display: block;
+			position: relative; /* Permite posicionar los elementos dentro de este contenedor */
+			margin-bottom: 14px; /* Agrega un margen inferior de 14px entre las imágenes */
+			border-radius: var(--rounded); /* Redondea las esquinas de las imágenes */
+			overflow: hidden;
+			box-shadow: 0 0 .5rem rgba(var(--black), .2);
+			img {
+				display: block; /* Elimina el espacio extra debajo de las imágenes */
+				width: 100%; /* La imagen ocupa el 100% del ancho del contenedor */
+				height: auto; /* Mantiene la proporción de la imagen */
+			}
+			/* PASO 3  */
+			/* Reiniciando estilos */
+			.container-details {
+				position: absolute;
+				bottom: -100%;
+				width: 100%;
+				padding: 0.875rem;
+				box-sizing: border-box;
+				display: flex;
+				justify-content: space-between;
+				background: rgba(var(--black), .4);
+				backdrop-filter: blur(3px);
+				color: rgb(var(--white));
+				transition: bottom .4s ease;
+				/* Estilos para el contenedor de detalles dentro de la imagen */
+				.details {
+					display: flex;
+					justify-content: flex-start;
+					align-items: center;
+					border-radius: var(--rounded);
+					i {
+						width: 1.5rem;
+						height: 1.5rem;
+						line-height: 1.5rem;
+						text-align: center;
+					}
+					span {
+						padding-inline: .5rem;
+						font-weight: 600;
+					}
+				}
+				button {
+					all: unset;
+					background: rgba(var(--black), .4);
+					display: block;
+					padding: var(--rounded) calc(var(--rounded) + var(--rounded));
+					border-radius: var(--rounded);
+				}
+			}
+			/* Estilos para cuando se hace hover sobre la lista de imágenes */
+			&:hover .container-details {
+				bottom: 0;
+			}
+		}
+	}
 }
 
-/* Estilos para las listas de imágenes */
-.images-container .images {
-    gap: 15px; /* Establece un espacio de 15px entre 
-    cada imagen */
-    columns: 5 340px; /* Organiza las imágenes en 5 columnas, 
-    con un ancho máximo de 340px por imagen */
-    max-width: 95%; /* Limita el ancho máximo del 
-    contenedor al 95% */
-    margin-top: 40px; /* Agrega un margen superior de 40px */
-    cursor: pointer; /* Cambia el cursor a un puntero para 
-    indicar que es interactivo */
-}
 
-/* Estilos para cada item de la lista de imágenes */
-.images .list {
-    display: flex; /* Usamos Flexbox para alinear los 
-    elementos dentro de la lista */
-    position: relative; /* Permite posicionar los 
-    elementos dentro de este contenedor */
-    display: inline-block; /* Asegura que cada lista 
-    de imágenes sea un bloque en línea */
-    list-style: none; /* Elimina el estilo de lista por defecto */
-    margin-bottom: 14px; /* Agrega un margen inferior
-     de 14px entre las imágenes */
-    border-radius: 4px; /* Redondea las esquinas de las imágenes */
-}
-
-.list img {
-    display: block; /* Elimina el espacio extra 
-    debajo de las imágenes */
-    width: 100%; /* La imagen ocupa el 100% del 
-    ancho del contenedor */
-    height: auto; /* Mantiene la proporción de la imagen */
-}
-
-
-
-/* PASO 3  */
-
-
-/* Estilos para el contenedor de texto dentro de la imagen */
-.list .container-details {
-    position: absolute; /* Posiciona el contenedor de 
-    texto de manera absoluta dentro de la imagen */
-    bottom: -100%; /* Inicialmente lo coloca fuera de la imagen (debajo) */
-    left: 0; /* Alinea al borde izquierdo */
-    width: 92%; /* Ocupa el 92% del ancho de la imagen */
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8),
-     rgba(0, 0, 0, 0.3)); /* Fondo con un gradiente oscuro */
-    color: white; /* El texto será blanco */
-    padding: 15px; /* Agrega 15px de relleno alrededor del texto */
-    display: flex; /* Usamos Flexbox para organizar los elementos */
-    justify-content: space-between; /* Distribuye el espacio entre 
-    los elementos */
-    align-items: center; /* Alinea los elementos verticalmente */
-    transition: bottom 0.3s ease; /* Agrega una transición suave 
-    al movimiento */
-    opacity: 0; /* Hace que el contenedor sea invisible inicialmente */
-    pointer-events: none; /* Evita que los elementos dentro del 
-    contenedor sean interactivos */
-}
-
-/* Estilos para cuando se hace hover sobre la lista de imágenes */
-.list:hover .container-details {
-    bottom: 0; /* Coloca el contenedor al fondo de la imagen */
-    opacity: 1; /* Hace visible el contenedor */
-    pointer-events: all; /* Permite interactuar con los elementos
-     dentro del contenedor */
-}
-
-/* Estilos para el contenedor de detalles dentro de la imagen */
-.details {
-    display: flex; /* Usamos Flexbox para organizar los elementos 
-    dentro del contenedor */
-    align-items: center; /* Alinea los elementos verticalmente */
-    gap: 10px; /* Establece un espacio de 10px entre los elementos */
-}
-
-/* Estilos para los iconos dentro de los detalles */
-.details i {
-    font-size: 1.5rem; /* Asigna un tamaño de fuente mayor al icono */
-    margin-right: 10px; /* Agrega un margen a la derecha del icono */
-}
-
-/* Estilos para el texto dentro de los detalles */
-.details span {
-    font-size: 1rem; /* Asigna un tamaño de fuente estándar 
-    para el texto */
-}
-
-/* Estilos para el botón dentro de los detalles */
-.details button {
-    background: white; /* El fondo del botón será blanco */
-    color: black; /* El texto dentro del botón será negro */
-    border: none; /* Elimina el borde por defecto del botón */
-    padding: 8px 12px; /* Agrega 8px de relleno superior e inferior 
-    y 12px de relleno izquierdo y derecho */
-    cursor: pointer; /* Cambia el cursor a un puntero cuando
-     pasa sobre el botón */
-    border-radius: 5px; /* Redondea las esquinas del botón */
-    display: flex; /* Usamos Flexbox para alinear los elementos
-     dentro del botón */
-    align-items: center; /* Alinea los elementos verticalmente 
-    dentro del botón */
-    gap: 8px; /* Establece un espacio de 8px entre el icono y el texto */
-}
 
 /* Estilos para los iconos dentro del botón */
 button i {
-    font-size: 1.4rem; /* Asigna un tamaño de fuente para los 
-    iconos dentro del botón */
-    cursor: pointer; /* Cambia el cursor a un puntero cuando 
-    pasa sobre el icono */
+	font-size: 1.4rem; /* Asigna un tamaño de fuente para los  iconos dentro del botón */
+	cursor: pointer; /* Cambia el cursor a un puntero cuando pasa sobre el icono */
 }
 
 /* PASO 4  */
 
-
 /* Estilos para el botón de cargar más imágenes */
 .load-more {
-    margin: 50px 0; /* Agrega márgenes superior e inferior de 50px */
-    font-size: 1.1rem; /* Asigna un tamaño de fuente ligeramente 
-    mayor que el estándar */
-    background: rgb(72, 165, 72); /* Establece un fondo verde 
-    para el botón */
-    padding: 10px 30px; /* Agrega 10px de relleno vertical 
-    y 30px horizontal */
-    color: white; /* El texto dentro del botón será blanco */
-    cursor: pointer; /* Cambia el cursor a un puntero cuando 
-    pasa sobre el botón */
+	margin: 50px 0; /* Agrega márgenes superior e inferior de 50px */
+	font-size: 1.1rem; /* Asigna un tamaño de fuente ligeramente mayor que el estándar */
+	background: rgb(var(--bg-button)); /* Establece un fondo verde 
+	para el botón */
+	padding: 10px 30px; /* Agrega 10px de relleno vertical y 30px horizontal */
+	color: rgb(var(--white)); /* El texto dentro del botón será blanco */
+	cursor: pointer; /* Cambia el cursor a un puntero cuando  pasa sobre el botón */
+	border: 1px solid transparent;
+	border-radius: var(--rounded);
 }
 
 /* Estilos para cuando el botón de cargar más está deshabilitado */
 .load-more.disabled {
-    opacity: 0.5; /* Hace que el botón sea semi-transparente */
+	opacity: 0.5; /* Hace que el botón sea semi-transparente */
 }
